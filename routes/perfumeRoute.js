@@ -7,10 +7,10 @@ const {
   }= require('../controllers/PerfumeController')
   router.post('/addPerfume',upload.single('image'), addPerfume);
   router.get('/getAllPerfumes', getAllPerfumes);
-  router.get('/getPerfumeById/:id', getPerfumeById);
-  router.put('/UpdatePerfumeById/:id', UpdatePerfumeById);
+  router.get('/getPerfumeById/:ID', getPerfumeById);
+router.put('/updatePerfume/:id', upload.single('image'), UpdatePerfumeById);
 
-  router.delete('/deletePerfumeById/:id', deletePerfume);
+  router.delete('/deletePerfumeById/:ID', deletePerfume);
 
 
   module.exports=router

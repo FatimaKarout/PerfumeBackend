@@ -59,7 +59,7 @@ const addPerfume = async (req, res) => {
     } catch (error) {
       res.status(400).json({
         success: false,
-        message: 'Perfume occured while deleting the article',
+        message: ' error occured while deleting the Perfume',
         error: error,
       });
     }
@@ -82,13 +82,23 @@ const addPerfume = async (req, res) => {
   };
   const UpdatePerfumeById = async (req, res) => {
     try {
-      const { id } = req.params.id; 
-      const updatedPerfumeData = req.body; 
+      const { id } = req.params;
+      const { price, name, category, discount, description, stock } = req.body;
   
-      // Find and update the project
+      // Gather updated data
+      const updatedPerfumeData = {
+        price,
+        name,
+        category,
+        discount,
+        image: req.file ? req.file.path : undefined, // Check if a new image is provided
+        description,
+        stock,
+      };
+  
       const updatedProject = await perfumesModel.findOneAndUpdate(
-        { id },
-        { $set: updatedPerfumeData }, // Use $set to update specific fields
+        { _id: id }, // Assuming your model uses "_id" for the unique identifier
+        { $set: updatedPerfumeData },
         { new: true }
       );
   
@@ -108,8 +118,9 @@ const addPerfume = async (req, res) => {
       res.status(400).json({
         success: false,
         message: "Unable to update project",
-        error: error.message, 
+        error: error.message,
       });
     }
   };
+  
   module.exports={addPerfume,getAllPerfumes,deletePerfume,getPerfumeById,UpdatePerfumeById}
