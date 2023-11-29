@@ -8,4 +8,5 @@ async function connectedToDatabase() {
     console.log('error',error) 
   }  
 }
+
 module.exports= connectedToDatabase

@@ -7,5 +7,5 @@ const User = new Schema({
     address :{type:String, required:true} ,
     role:{type:String, required:true} ,
 })
-const user = model('user',User)
+const user = model('user', User)
 module.exports = user
