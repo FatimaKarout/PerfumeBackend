@@ -10,12 +10,11 @@ app.use(cors())
 app.use(bodyParser.json())
 const cartRoute = require('./routes/cartRoute');
 app.use('/cart' , cartRoute)
+const perfumeRoute = require('./routes/perfumeRoute')
 
 app.use('/user', userRoute)
 
-app.get("/", (_, res) => {
-    res.send("Welcome to perfume");
-});
+
 
 app.listen(PORT,() => {
 connectedToDatabase()
