@@ -13,7 +13,8 @@ const Order = new Schema({
     Payment: {
             type:Schema.Types.ObjectId,
             ref: 'Payment',
-            required: true}
+            default: null  // provide a default value
+        }
 
 })
 const order= model('order',Order)
