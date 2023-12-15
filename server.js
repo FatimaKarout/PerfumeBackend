@@ -10,7 +10,10 @@ app.use(cors())
 app.use(bodyParser.json())
 const cartRoute = require('./routes/cartRoute');
 app.use('/cart' , cartRoute)
-const perfumeRoute = require('./routes/perfumeRoute')
+const perfumeRoute = require('./routes/perfumeRoute');
+const orderRoute = require('./routes/orderRoute')
+app.use('/perfumes',perfumeRoute);
+app.use('/order',orderRoute);
 
 app.use('/user', userRoute)
 app.use('/perfume', perfumeRoute)

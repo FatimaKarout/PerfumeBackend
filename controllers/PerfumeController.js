@@ -27,7 +27,7 @@ const addPerfume = async (req, res) => {
     } catch (error) {
       res.status(400).json({
         code: 400,
-        message: 'Perffume not added successfully',
+        message: 'Perfume not added successfully',
         error: error.message
       });
     }
