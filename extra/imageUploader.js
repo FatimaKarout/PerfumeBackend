@@ -1,9 +1,9 @@
 const axios = require('axios');
-const IMAGEBB_API_KEY = process.env.IMAGEBB_API_KEY;
+const IMAGE_API_KEY = process.env.IMAGE_API_KEY;
 
 exports.imageUploader = async (req) => {
   const formData = new FormData();
-  formData.append('key', IMAGEBB_API_KEY);
+  formData.append('key', IMAGE_API_KEY);
   const image = req.file.buffer.toString('base64');
   formData.append('image', image);
 

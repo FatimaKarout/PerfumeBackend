@@ -121,6 +121,24 @@ const addPerfume = async (req, res) => {
         error: error.message,
       });
     }
+  };  
+
+  const filteredPerfume = async (req, res) => {
+    try {
+      const { category } = req.params;
+      const filtered = await perfumesModel.find({ category });
+      res.status(200).json({
+        success: true,
+        message: `Perfumes filtered by category: ${category}`,
+        data: filtered,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: "Error filtering perfumes",
+        error: error.message,
+      });
+    }
   };
   
-  module.exports={addPerfume,getAllPerfumes,deletePerfume,getPerfumeById,UpdatePerfumeById}
+  module.exports={addPerfume,getAllPerfumes,deletePerfume,getPerfumeById,UpdatePerfumeById,filteredPerfume}
