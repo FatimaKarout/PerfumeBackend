@@ -33,7 +33,22 @@ const getCartByID = async (req, res) => {
     });
   }
 };
-
+const getCartByUserID = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ User: req.params.useridd });
+    res.status(200).json({
+      success: true,
+      message: 'Data retrieved successfully',
+      data: cart,
+    });
+  } catch (error) {
+    res.status(200).json({
+      success: false,
+      message: 'unable to get cart by ID',
+      error: error,
+    });
+  }
+};
 const addCart= async (req, res) => {
   try {
     const cart = await Cart.create(req.body);
@@ -84,6 +99,34 @@ const deleteCart = async (req, res) => {
     });
   }
 };
+const updatePerfumesForUser = async (req, res) => {
+  try {
+    const userid = req.params; // Corrected
+    const { newPerfumes } = req.body;
+
+    // User found, update the perfumes array
+    const updatedUser = await Cart.findOneAndUpdate(
+      { User: userid }, // Assuming 'User' is the correct field in your Cart model
+      { $push: { perfumes: { $each: newPerfumes } } },
+      { new: true } // to return the updated document
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Perfumes updated successfully',
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error('Error updating perfumes:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+      error: error,
+    });
+  }
+};
+
+
 
 module.exports = {
   getAllCarts,
@@ -91,4 +134,6 @@ module.exports = {
   addCart,
   updateCartByID,
   deleteCart,
+  updatePerfumesForUser,
+  getCartByUserID,
 };

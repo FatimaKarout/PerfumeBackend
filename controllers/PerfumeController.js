@@ -82,7 +82,7 @@ const addPerfume = async (req, res) => {
   };
   const UpdatePerfumeById = async (req, res) => {
     try {
-      const { id } = req.params;
+      const { ID } = req.params;
       const { price, name, category, discount, description, stock } = req.body;
   
       // Gather updated data
@@ -97,7 +97,7 @@ const addPerfume = async (req, res) => {
       };
   
       const updatedProject = await perfumesModel.findOneAndUpdate(
-        { _id: id }, // Assuming your model uses "_id" for the unique identifier
+        { _id: ID}, // Assuming your model uses "_id" for the unique identifier
         { $set: updatedPerfumeData },
         { new: true }
       );

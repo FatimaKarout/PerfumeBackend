@@ -8,7 +8,7 @@ const {
   router.post('/addPerfume',upload.single('image'), addPerfume);
   router.get('/getAllPerfumes', getAllPerfumes);
   router.get('/getPerfumeById/:ID', getPerfumeById);
-router.put('/updatePerfume/:id', upload.single('image'), UpdatePerfumeById);
+router.put('/updatePerfume/:ID', upload.single('image'), UpdatePerfumeById);
 
   router.delete('/deletePerfumeById/:ID', deletePerfume);
 

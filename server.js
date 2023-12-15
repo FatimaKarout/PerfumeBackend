@@ -13,6 +13,8 @@ app.use('/cart' , cartRoute)
 const perfumeRoute = require('./routes/perfumeRoute')
 
 app.use('/user', userRoute)
+app.use('/perfume', perfumeRoute)
+
 
 
 

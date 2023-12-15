@@ -51,14 +51,14 @@ const getUserById = async (req, res) => {
 // register
 const register = async (req, res) => {
   try {
-    const { fullName, email, password, address, role } = req.body;
+    const { fullName, email, password, address } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       fullName,
       email,
       password: hashedPassword,
       address,
-      role,
+      
     });
     res.status(200).json({
       success: true,
@@ -85,7 +85,7 @@ const login = async (req, res) => {
     if (!user || !passwordMatch) {
       return res.status(401).json({
         success: false,
-        message: "Email or Password  found",
+        message: "Email or Password  Wrong",
       });
     }
 
