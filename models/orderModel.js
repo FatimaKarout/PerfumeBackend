@@ -1,7 +1,7 @@
 const mongoose =require('mongoose')
 const {Schema,model } = mongoose
 const Order = new Schema({
-    order: {type:Number ,required:true},
+    order: {type:Number  ,default: null},
     perfumes: {type:Array, required:true },
     amount :{type:Number, required:true} ,
     status:{type:String, required:true} ,

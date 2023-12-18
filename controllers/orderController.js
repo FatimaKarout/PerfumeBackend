@@ -52,10 +52,25 @@ const setStatus = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
       }
 };
+const deleteAllDocuments = async (req, res) => {
+  try {
+    // Delete all documents in the collection
+    const result = await Order.deleteMany({});
 
+    if (result.deletedCount > 0) {
+      return res.status(200).json({ message: `Deleted ${result.deletedCount} documents from the collection.` });
+    } else {
+      return res.status(404).json({ message: 'No documents found to delete.' });
+    }
+  } catch (error) {
+    console.error('Error deleting documents:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 module.exports = {
   addOrder,
   getAllOrders,
   getOrdersByUserId,
   setStatus,
+  deleteAllDocuments,
 };

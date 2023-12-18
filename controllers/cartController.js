@@ -101,14 +101,24 @@ const deleteCart = async (req, res) => {
 };
 const updatePerfumesForUser = async (req, res) => {
   try {
-    const userid = req.params; // Corrected
-    const { newPerfumes } = req.body;
+    const userid = req.params.userid;
+    const { perfumes } = req.body;
+
+    // Check if the user exists
+    const existingUser = await Cart.findOne({ User: userid });
+
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
 
     // User found, update the perfumes array
     const updatedUser = await Cart.findOneAndUpdate(
-      { User: userid }, // Assuming 'User' is the correct field in your Cart model
-      { $push: { perfumes: { $each: newPerfumes } } },
-      { new: true } // to return the updated document
+      { User: userid },
+      { $push: { perfumes: { $each: perfumes } } },
+      { new: true }
     );
 
     res.status(200).json({
@@ -128,6 +138,7 @@ const updatePerfumesForUser = async (req, res) => {
 
 
 
+
 module.exports = {
   getAllCarts,
   getCartByID,
@@ -136,4 +147,4 @@ module.exports = {
   deleteCart,
   updatePerfumesForUser,
   getCartByUserID,
-};
+}
