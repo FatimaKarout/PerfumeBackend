@@ -19,7 +19,7 @@ const isAuth = (roles) => {
         message: "No token",
       });
     try {
-      const credentials = jwt.verify(token, process.env.TOKEN_KEY);
+      const credentials = jwt.verify(token, process.env.JWT_SECRET);
       const hasAccess = roles.includes(credentials.role);
       if (!hasAccess)
         return res.status(400).json({
